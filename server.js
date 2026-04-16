@@ -4,7 +4,9 @@ import path from 'path'
 dotenv.config({
     path:'./.env'
 })
+
 import { connectDb } from "./src/database/db.js";
+import './src/utils/cronservice.js'
 
 connectDb()
 app.listen(3000,()=>{

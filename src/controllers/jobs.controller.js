@@ -1,6 +1,7 @@
 import express from "express";
 import {authMiddleware} from '../middlewares/auth.middleware.js'
 import {jobModel} from '../models/job.model.js'
+import cloudinary from '../utils/cloudinary.js'
 
 async function createJob(req,res){
    
@@ -14,11 +15,17 @@ async function createJob(req,res){
         if(existingJob){
             return res.status(409).json({message:"Job already exists!!"})
         }
+        let resumeUrl = "";
+        if(req.file){
+            const result = await cloudinary.uploader.upload(req.file.path,{resource_type:"raw"})
+            resumeUrl = result.secure_url
+        }
         const job = await jobModel.create({
             userId:userId,
             company,
             role,
             status,
+            resumeUrl,
             appliedDate,
             reminderDate
     
