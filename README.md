@@ -1,20 +1,21 @@
 # 🚀 Job Application Tracker Backend
 
-A backend system that helps users track and manage their job applications with features like authentication, job management, filtering, pagination, and resume uploads.
+A backend system that helps users track and manage their job applications with features like authentication, job management, filtering, pagination, resume uploads, and automated email reminders.
 
 ---
 
 ## 📌 Features
 
-* 🔐 User Authentication (Register & Login using JWT)
-* 📌 Job Management (Create, Read, Update, Delete)
-* 🔄 Status Tracking (Applied, Interview, Rejected, Offer)
-* 🔍 Search jobs by company name
-* 🎯 Filter jobs by status
-* 📄 Pagination for efficient data handling
-* 📎 Resume Upload (PDF support using Multer)
-* 🛡️ Protected routes using middleware
-* ⚡ Clean REST API structure
+🔐 User Authentication (Register & Login using JWT)
+📌 Job Management (Create, Read, Update, Delete)
+🔄 Status Tracking (Applied, Interview, Rejected, Offer)
+🔍 Search jobs by company name
+🎯 Filter jobs by status
+📄 Pagination for efficient data handling
+📎 Resume Upload (PDF support using Multer)
+📧 Email Reminder System (Sends reminder 1 day before follow-up using cron jobs)
+🛡️ Protected routes using middleware
+⚡ Clean REST API structure
 
 ---
 
@@ -27,12 +28,14 @@ A backend system that helps users track and manage their job applications with f
 * JWT (Authentication)
 * Bcrypt (Password hashing)
 * Multer (File uploads)
+* Nodemailer (Email service)
+* Node-cron (Scheduled jobs)
 
 ---
 
 ## 📁 Project Structure
 
-```id="p8l2jf"
+```
 src/
 │
 ├── controllers/
@@ -50,48 +53,48 @@ src/
 
 ## 🔐 Authentication APIs
 
-### Register
+**Register**
+`POST /api/register`
 
-POST `/api/register`
-
-### Login
-
-POST `/api/login`
+**Login**
+`POST /api/login`
 
 ---
 
 ## 📌 Job APIs
 
-### Create Job
+**Create Job**
+`POST /api/create`
 
-POST `/api/create`
+**Get All Jobs**
+`GET /api/getall`
 
-### Get All Jobs
+**Get Single Job**
+`GET /api/getjob`
 
-GET `/api/getall`
+**Update Job**
+`PATCH /api/update/:id`
 
-### Get Single Job
-
-GET `/api/getjob`
-
-### Update Job
-
-PATCH `/api/update/:id`
-
-### Delete Job
-
-DELETE `/api/delete/:id`
+**Delete Job**
+`DELETE /api/delete/:id`
 
 ---
 
 ## 📎 Resume Upload
 
-### Upload Resume
-
-POST `/api/upload`
+**Upload Resume**
+`POST /api/upload`
 
 * Use `form-data`
 * Key: `file` (File)
+
+---
+
+## 📧 Email Reminder System
+
+* Automatically sends reminder emails **1 day before the scheduled follow-up date**
+* Implemented using **Node-cron** for scheduling
+* Uses **Nodemailer** for sending emails
 
 ---
 
@@ -101,7 +104,9 @@ All job and resume routes require authentication.
 
 Add header:
 
+```
 Authorization: Bearer YOUR_TOKEN
+```
 
 ---
 
@@ -109,22 +114,25 @@ Authorization: Bearer YOUR_TOKEN
 
 Create a `.env` file in root:
 
-```id="q6q7ju"
+```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
+
+EMAIL_USER=your_email
+EMAIL_PASS=your_email_password_or_app_password
 ```
 
 ---
 
 ## 🚀 How to Run Locally
 
-```id="q6epzk"
+```bash
 # Clone repository
-git clone <your-repo-url>
+git clone https://github.com/gagannyadavv/job_tracker.git
 
 # Install dependencies
 npm install
@@ -142,21 +150,21 @@ npm run dev
 * Middleware (Protected Routes)
 * MongoDB Query Filtering & Pagination
 * File Upload Handling using Multer
+* Cron Jobs & Email Automation
 * MVC Architecture
 
 ---
 
 ## 📈 Future Improvements
 
-* ⏰ Email reminder system (cron jobs)
-* 📊 Analytics dashboard
-* ☁️ Cloud storage (Cloudinary / AWS S3)
-* 🧾 Resume versioning
-
----
+⏰ Advanced scheduling & custom reminders
+📊 Analytics dashboard
+☁️ Cloud storage (AWS S3)
+🧾 Resume versioning
+📱 Frontend integration
 
 ---
 
 ## 👨‍💻 Author
 
-Gagan
+**Gagan**
